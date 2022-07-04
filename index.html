@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Perpustakaan</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Aplikasi Perpustakaan</h1>
+    </div>
+    
+  </header>
+
+  <div class="wrapper">
+    <div class="container shadow" id="add-toread">
+      <h2 class="container-header text-center">Tambahkan buku</h2>
+      <form class="form" action="#" id="form">
+        <div class="form-content">
+          <label for="buku">Masukkan nama buku</label>
+          <input type="text" id="buku" name="buku" required>
+        </div>
+        <div class="form-content">
+          <label for="date">Masukkan tanggal masuk buku</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <input type="submit" value="Submit" name="Submit" class="btn-submit">
+      </form>
+    </div>
+
+    <div class="container">
+      <h2 class="container-header">Belum selesai dibaca</h2>
+      <div class="list-buku" id="toreads">
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="container-header">Selesai dibaca</h2>
+      <div class="list-buku" id="completed-toreads">
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
