@@ -8,11 +8,12 @@ function generateId() {
   return +new Date();
 }
 
-function generateToreadObject(id, buku, timestamp, isCompleted) {
+function generateToreadObject(id, title, author, year, isCompleted) {
   return {
     id,
-    buku,
-    timestamp,
+    title,
+    author,
+    year,
     isCompleted
   };
 }
@@ -65,17 +66,20 @@ function loadDataFromStorage() {
 }
 
 function makeToread(toreadObject) {
-  const {id, buku, timestamp, isCompleted} = toreadObject;
+  const {id, title, author, year, isCompleted} = toreadObject;
 
   const textTitle = document.createElement('h2');
-  textTitle.innerText = buku;
+  textTitle.innerText = title;
 
-  const textTimestamp = document.createElement('p');
-  textTimestamp.innerText = timestamp;
+  const textAuthor = document.createElement('p');
+  textAuthor.innerText = author;
+  
+  const textYear = document.createElement('p');
+  textYear.innerText = year;
 
   const textContainer = document.createElement('div');
   textContainer.classList.add('inner');
-  textContainer.append(textTitle, textTimestamp);
+  textContainer.append(textTitle, textAuthor, textYear);
 
   const container = document.createElement('div');
   container.classList.add('item', 'shadow');
@@ -83,8 +87,18 @@ function makeToread(toreadObject) {
   container.setAttribute('id', `toread-${id}`);
 
   if (isCompleted) {
+    const undoButton = document.createElement('button');
+    undoButton.classList.add('undo-button');
+
+    undoButton.addEventListener('click', function() {
+      undoTaskFromCompleted(id);
+    });
+
+    container.append(undoButton);
+
     const trashButton = document.createElement('button');
     trashButton.classList.add('trash-button');
+
     trashButton.addEventListener('click', function() {
       removeTaskFromCompleted(id);
     });
@@ -105,11 +119,12 @@ function makeToread(toreadObject) {
 }
 
 function addToread() {
-  const textToread = document.getElementById('buku').value;
-  const timestamp = document.getElementById('date').value;
+  const textToread = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const year = document.getElementById('year').value;
 
   const generateID = generateId();
-  const toreadObject = generateToreadObject(generateID, textToread, timestamp, false);
+  const toreadObject = generateToreadObject(generateID, textToread, author, year, false);
   toreads.push(toreadObject);
 
   document.dispatchEvent(new Event(RENDER_EVENT));
@@ -122,6 +137,16 @@ function addTaskToCompleted(toreadId) {
   if (toreadTarget == null) return;
 
   toreadTarget.isCompleted = true;
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
+}
+
+function undoTaskFromCompleted(toreadId) {
+  const toreadTarget = findToread(toreadId);
+
+  if (toreadTarget == null) return;
+  
+  toreadTarget.isCompleted = false;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }

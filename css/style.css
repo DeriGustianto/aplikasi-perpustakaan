@@ -31,8 +31,8 @@ header {
 .wrapper .container {
   width: 1024px;
   border-radius: 7px;
-  background-color: rgb(218, 238, 255);
-  padding: 15px;
+  background-color: rgb(161, 211, 255);
+  padding: 20px;
   margin: 15px;
   flex-grow: 1;
   height: fit-content;
@@ -63,7 +63,7 @@ header {
   display: flex;
   flex-direction: column;
   padding: 15px;
-  height: 300px;
+  height: 400px;
   border-radius: 15px;
 }
 
@@ -131,6 +131,22 @@ input[type=text], input[type=date], .btn-submit:focus {
 
 .check-button:hover {
   background: url('../assets/check-circle.svg');
+  background-size: contain;
+}
+
+.undo-button {
+  width: 40px;
+  height: 40px;
+
+  background: url('../assets/redo.svg');
+  background-size: contain;
+  margin-left: auto;
+  cursor: pointer;
+  border: none;
+}
+
+.undo-button:hover {
+  background: url('../assets/redo.svg');
   background-size: contain;
 }
 
