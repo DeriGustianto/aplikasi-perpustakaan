@@ -113,7 +113,17 @@ function makeToread(toreadObject) {
     });
 
     container.append(checkButton);
+
+    const trashButton = document.createElement('button');
+    trashButton.classList.add('trash-button');
+
+    trashButton.addEventListener('click', function() {
+      removeTaskFromCompleted(id);
+    });
+
+    container.append(trashButton);
   }
+  
 
   return container;
 }
